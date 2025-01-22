@@ -153,3 +153,18 @@ Armazenamento em longo prazo no S3 Glacier: Para arquivos e logs de auditoria de
 ![DiagramaFInal111 drawio](https://github.com/user-attachments/assets/2ca48988-95d7-4cc1-ada8-8bda6b87ea3d)
 
 *o AWS Replication Agent envia os dados on-premises para uma VPC Temporária (Staging), enquanto o AWS MGN converte as VMs em instâncias EC2. Paralelamente, o AWS DMS cuida da migração do banco de dados para Amazon RDS, garantindo integridade de dados.*
+
+
+# 💰 Valores 
+
+## _Estimativa de custo Lift-and-Shift ETAPA 1_
+
+* Custo mensal: 380,99 USD USD
+  
+* Custo total de 12 months : 4.571,88 USD USD
+<br>
+
+![image](https://github.com/user-attachments/assets/bf5f1721-3976-461b-9b10-6a044952790e)
+
+
+  
