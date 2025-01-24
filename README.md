@@ -150,7 +150,8 @@ Armazenamento em longo prazo no S3 Glacier: Para arquivos e logs de auditoria de
 
 <h3>Diagrama da infraestrutura na AWS</h3>
 
-![DiagramaFInal111 drawio](https://github.com/user-attachments/assets/2ca48988-95d7-4cc1-ada8-8bda6b87ea3d)
+![Diagrama sem título drawio](https://github.com/user-attachments/assets/9b7b1d42-3acd-4ec1-9a62-7c17c09e59b4)
+
 
 *o AWS Replication Agent envia os dados on-premises para uma VPC Temporária (Staging), enquanto o AWS MGN converte as VMs em instâncias EC2. Paralelamente, o AWS DMS cuida da migração do banco de dados para Amazon RDS, garantindo integridade de dados.*
 
