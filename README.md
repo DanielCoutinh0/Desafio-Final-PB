@@ -110,7 +110,7 @@ Protocolo TCP (443, 1500, 3306):
 
 Para controle, transferência de dados e conexão com o banco de dados.
 
-<h3>Como serão garantidos os requisitos de Segurança?</h3>
+<h3> 🔐Como serão garantidos os requisitos de Segurança?</h3>
 
 Controle de Acesso:
 
