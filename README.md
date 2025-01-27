@@ -47,68 +47,71 @@ carga e que armazena estáticos como fotos e links. (5GB de dados, 4Gb de RAM,
 
 A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar a arquitetura.
 
-<h3>Quais atividades são necessárias para a migração?</h3>
+# Atividades Necessárias para a Migração
 
-Planejamento e Análise:
-Avaliação da infraestrutura atual (servidores, banco de dados, aplicações).
-Identificação de requisitos de desempenho, segurança e escalabilidade.
-Definição da estratégia de migração (re-host, re-platform, re-architect).
+## 1. Planejamento e Análise
+- Avaliação da infraestrutura atual (servidores, banco de dados, aplicações).
+- Identificação de requisitos de desempenho, segurança e escalabilidade.
+- Definição da estratégia de migração (re-host, re-platform, re-architect).
 
-Configuração do Ambiente na AWS:
-Criar instâncias EC2 para backend e frontend.
-Provisionar a infraestrutura de rede (VPC, Subnets, Security Groups).
-Configurar servidores de replicação para staging area.
-Provisionar RDS para o banco de dados.
+## 2. Configuração do Ambiente na AWS
+- Criar instâncias EC2 para backend e frontend.
+- Provisionar a infraestrutura de rede (VPC, Subnets, Security Groups).
+- Configurar servidores de replicação para staging area.
+- Provisionar RDS para o banco de dados.
 
-Instalação do AWS Replication Agent:
-Instalar e configurar o AWS MGN Replication Agent nos servidores de origem para capturar dados e transferi-los para a AWS.
+## 3. Instalação do AWS Replication Agent
+- Instalar e configurar o AWS MGN Replication Agent nos servidores de origem para capturar dados e transferi-los para a AWS.
 
-Replicação dos Dados:
-Transferência de dados em tempo real para os servidores de replicação na AWS usando TCP 1500.
-Validação da integridade dos dados replicados.
+## 4. Replicação dos Dados
+- Transferência de dados em tempo real para os servidores de replicação na AWS usando TCP 1500.
+- Validação da integridade dos dados replicados.
 
-Testes (Test EC2 Instances):
-Implementação de testes nas instâncias provisionadas para validar desempenho e funcionalidades.
+## 5. Testes (Test EC2 Instances)
+- Implementação de testes nas instâncias provisionadas para validar desempenho e funcionalidades.
 
-Cutover (Migração final):
-Atualização dos DNS para apontar para as novas instâncias AWS.
-Monitoramento pós-migração para garantir estabilidade.
+## 6. Cutover (Migração Final)
+- Atualização dos DNS para apontar para as novas instâncias AWS.
+- Monitoramento pós-migração para garantir estabilidade.
 
-Descomissionamento do Ambiente Antigo:
-Após testes e validações, desativação dos servidores antigos.
+## 7. Descomissionamento do Ambiente Antigo
+- Após testes e validações, desativação dos servidores antigos.
 
-<h3>Quais as ferramentas vão ser utilizadas?</h3>
+---
 
-AWS MGN (Application Migration Service):
+# Ferramentas Utilizadas
 
-Para replicação contínua dos servidores de origem para a AWS.
-Amazon EC2:
+## 1. **AWS MGN (Application Migration Service)**
+- Para replicação contínua dos servidores de origem para a AWS.
 
-Hospedagem das instâncias frontend e backend após a migração.
-Amazon S3:
+## 2. **Amazon EC2**
+- Hospedagem das instâncias frontend e backend após a migração.
 
-Armazenamento temporário de dados durante a migração.
-AWS DMS (Database Migration Service):
+## 3. **Amazon S3**
+- Armazenamento temporário de dados durante a migração.
 
-Para a migração do banco de dados MySQL para o Amazon RDS.
-Amazon RDS:
+## 4. **AWS DMS (Database Migration Service)**
+- Para a migração do banco de dados MySQL para o Amazon RDS.
 
-Para armazenamento gerenciado do banco de dados MySQL após a migração.
-AWS CloudWatch:
+## 5. **Amazon RDS**
+- Para armazenamento gerenciado do banco de dados MySQL após a migração.
 
-Para monitoramento de logs e desempenho das instâncias EC2 e banco de dados.
-AWS VPC (Virtual Private Cloud):
+## 6. **AWS CloudWatch**
+- Para monitoramento de logs e desempenho das instâncias EC2 e banco de dados.
 
-Para configurar a infraestrutura de rede segura.
-AWS Security Groups:
+## 7. **AWS VPC (Virtual Private Cloud)**
+- Para configurar a infraestrutura de rede segura.
 
-Para controle do tráfego de entrada e saída das instâncias.
-AWS Route 53:
+## 8. **AWS Security Groups**
+- Para controle do tráfego de entrada e saída das instâncias.
 
-Para gerenciamento de DNS e redirecionamento de tráfego após o cutover.
-Protocolo TCP (443, 1500, 3306):
+## 9. **AWS Route 53**
+- Para gerenciamento de DNS e redirecionamento de tráfego após o cutover.
 
-Para controle, transferência de dados e conexão com o banco de dados.
+## 10. **Protocolos TCP (443, 1500, 3306)**
+- Para controle, transferência de dados e conexão com o banco de dados.
+
+<br>
 
 <h3> 🔐Como serão garantidos os requisitos de Segurança?</h3>
 
