@@ -113,50 +113,54 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 
 <br>
 
-<h3> 🔐Como serão garantidos os requisitos de Segurança?</h3>
+# Garantia de Segurança e Backup no Processo de Migração para AWS
 
-Controle de Acesso:
+## 🔐 Como serão garantidos os requisitos de Segurança?
 
-Configuração de Security Groups para restringir acessos.
-Uso de IAM Roles para limitar permissões específicas aos serviços.
-Criptografia:
+### **Controle de Acesso:**
+- **Security Groups**: Configuração de regras para restringir acessos aos serviços e instâncias.
+- **IAM Roles**: Uso de IAM Roles para limitar permissões específicas aos serviços, garantindo que apenas usuários e processos autorizados possam acessar determinados recursos.
 
-Tráfego seguro via TCP 443 (TLS/SSL) para controle de replicação.
-Armazenamento de dados criptografados no S3 e RDS (AES-256).
-Isolamento de Rede:
+### **Criptografia:**
+- **Tráfego seguro**: Uso de protocolo TCP 443 (TLS/SSL) para controle de replicação entre ambientes, garantindo tráfego seguro.
+- **Armazenamento de dados criptografados**: Os dados são armazenados de forma criptografada no S3 e no RDS utilizando AES-256, para proteger a integridade e confidencialidade das informações.
 
-Divisão entre subnet pública (frontend) e privada (backend/banco de dados).
-Uso de NAT Gateway para comunicação segura sem exposição direta à internet.
-Monitoramento e Auditoria:
+### **Isolamento de Rede:**
+- **Subnet Pública e Privada**: A infraestrutura será dividida entre uma subnet pública (para o frontend) e uma subnet privada (para o backend e banco de dados), garantindo um melhor controle de tráfego.
+- **NAT Gateway**: Implementação de um NAT Gateway para permitir comunicação segura entre as instâncias privadas e a internet, sem expô-las diretamente.
 
-Uso do AWS CloudTrail para auditoria de eventos de acesso.
-Configuração de CloudWatch Alarms para detecção de anomalias.
-Firewall de Aplicação:
+### **Monitoramento e Auditoria:**
+- **AWS CloudTrail**: Uso do CloudTrail para registrar e auditar todos os eventos de acesso aos serviços da AWS.
+- **AWS CloudWatch Alarms**: Configuração de alarmes para detectar anomalias de desempenho ou segurança nos serviços em tempo real.
 
-Implementação do AWS WAF (Web Application Firewall) para proteção contra ataques de camada de aplicação (DDoS, SQL Injection).
+### **Firewall de Aplicação:**
+- **AWS WAF**: Implementação do Web Application Firewall (WAF) para proteger as aplicações contra ataques comuns, como DDoS e SQL Injection.
 
-<h3>Como será realizado o processo de Backup?</h3>
+---
 
-Como será realizado o processo de Backup?
-Durante a migração e após a conclusão, o processo de backup será feito das seguintes maneiras:
+## 🔄 Como será realizado o processo de Backup?
 
-Durante a migração:
+### **Durante a Migração:**
+- **AWS MGN**: O AWS Migration Hub (MGN) realiza a replicação contínua dos dados, mantendo versões das informações. Isso garante a possibilidade de recuperação em caso de falha durante o processo de migração.
+- **Armazenamento Temporário no Amazon S3**: Caso seja necessário reverter a migração, os dados podem ser armazenados temporariamente no Amazon S3 para backup.
 
-O AWS MGN mantém versões contínuas dos dados replicados, permitindo recuperação em caso de falha.
-Os dados também podem ser armazenados temporariamente no Amazon S3, caso seja necessário reverter a migração.
-Após a migração (Ambiente AWS):
+### **Após a Migração (Ambiente AWS):**
+- **Snapshots do Amazon EBS**: Realização de snapshots periódicos dos volumes EC2 para garantir recuperação em caso de falha no armazenamento.
+- **Backups Automáticos do Amazon RDS**: Configuração de backups automáticos no Amazon RDS, com retenção configurável, para garantir a integridade dos dados.
+- **Replication Cross-Region**: Implementação de replicação de banco de dados para outra região, garantindo alta disponibilidade e tolerância a falhas.
+- **Armazenamento de Longo Prazo no S3 Glacier**: Arquivos e logs de auditoria serão armazenados no S3 Glacier, permitindo armazenamento a longo prazo com baixo custo.
 
-Snapshots do Amazon EBS: Snapshots periódicos dos volumes de armazenamento EC2 para recuperação em caso de falha.
-Backups automáticos do RDS: Configuração de retenção de backups automatizados no Amazon RDS.
-Replication Cross-Region: Configurar replicação do banco de dados para outra região para garantir alta disponibilidade.
-Armazenamento em longo prazo no S3 Glacier: Para arquivos e logs de auditoria de longo prazo.
+---
 
-<h3>Diagrama da infraestrutura na AWS</h3>
+## 🖥️ Diagrama da Infraestrutura na AWS
 
-![Diagrama sem título drawio](https://github.com/user-attachments/assets/9b7b1d42-3acd-4ec1-9a62-7c17c09e59b4)
+![Diagrama da infraestrutura na AWS](https://github.com/user-attachments/assets/9b7b1d42-3acd-4ec1-9a62-7c17c09e59b4)
 
+**Descrição do Diagrama:**
+- O **AWS Replication Agent** envia dados on-premises para uma **VPC Temporária (Staging)**.
+- O **AWS MGN** converte as VMs em **instâncias EC2**.
+- O **AWS DMS** é responsável pela migração do banco de dados para o **Amazon RDS**, garantindo a integridade dos dados durante o processo.
 
-*o AWS Replication Agent envia os dados on-premises para uma VPC Temporária (Staging), enquanto o AWS MGN converte as VMs em instâncias EC2. Paralelamente, o AWS DMS cuida da migração do banco de dados para Amazon RDS, garantindo integridade de dados.*
 
 
 # 💰 Valores 
@@ -165,7 +169,6 @@ Armazenamento em longo prazo no S3 Glacier: Para arquivos e logs de auditoria de
 
 * Custo mensal: 380,99 USD USD
   
-* Custo total de 12 months : 4.571,88 USD USD
 <br>
 
 ![image](https://github.com/user-attachments/assets/bf5f1721-3976-461b-9b10-6a044952790e)
