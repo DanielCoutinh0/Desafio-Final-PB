@@ -47,110 +47,49 @@ carga e que armazena estáticos como fotos e links. (5GB de dados, 4Gb de RAM,
 
 A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar a arquitetura.
 
-# Atividades Necessárias para a Migração
-
-## 1. Planejamento e Análise
+## Atividades da Migração
 - Avaliação da infraestrutura atual (servidores, banco de dados, aplicações).
 - Identificação de requisitos de desempenho, segurança e escalabilidade.
-- Definição da estratégia de migração (re-host, re-platform, re-architect).
-
-## 2. Configuração do Ambiente na AWS
 - Criar instâncias EC2 para backend e frontend.
 - Provisionar a infraestrutura de rede (VPC, Subnets, Security Groups).
 - Configurar servidores de replicação para staging area.
 - Provisionar RDS para o banco de dados.
-
-## 3. Instalação do AWS Replication Agent
 - Instalar e configurar o AWS MGN Replication Agent nos servidores de origem para capturar dados e transferi-los para a AWS.
-
-## 4. Replicação dos Dados
 - Transferência de dados em tempo real para os servidores de replicação na AWS usando TCP 1500.
-- Validação da integridade dos dados replicados.
-
-## 5. Testes (Test EC2 Instances)
-- Implementação de testes nas instâncias provisionadas para validar desempenho e funcionalidades.
-
-## 6. Cutover (Migração Final)
 - Atualização dos DNS para apontar para as novas instâncias AWS.
-- Monitoramento pós-migração para garantir estabilidade.
-
-## 7. Descomissionamento do Ambiente Antigo
 - Após testes e validações, desativação dos servidores antigos.
 
----
+## Ferramentas Utilizadas
 
-# Ferramentas Utilizadas
+- **AWS MGN** (Application Migration Service) para replicação contínua dos servidores de origem para a AWS.
+- **Amazon EC2** para hospedagem das instâncias frontend e backend após a migração.
+- **Amazon S3** para armazenamento temporário de dados durante a migração.
+- **AWS DMS** (Database Migration Service) para a migração do banco de dados MySQL para o Amazon RDS.
+- **Amazon RDS** para armazenamento gerenciado do banco de dados MySQL após a migração.
+- **AWS CloudWatch** para monitoramento de logs e desempenho das instâncias EC2 e banco de dados.
+- **AWS VPC** (Virtual Private Cloud) para configurar a infraestrutura de rede segura.
+- **AWS Security Groups** para controle do tráfego de entrada e saída das instâncias.
+- ***AWS Route 53** para gerenciamento de DNS e redirecionamento de tráfego após o cutover.
+- **Protocolos TCP** (443, 1500, 3306) para controle, transferência de dados e conexão com o banco de dados.
 
-## 1. **AWS MGN (Application Migration Service)**
-- Para replicação contínua dos servidores de origem para a AWS.
-
-## 2. **Amazon EC2**
-- Hospedagem das instâncias frontend e backend após a migração.
-
-## 3. **Amazon S3**
-- Armazenamento temporário de dados durante a migração.
-
-## 4. **AWS DMS (Database Migration Service)**
-- Para a migração do banco de dados MySQL para o Amazon RDS.
-
-## 5. **Amazon RDS**
-- Para armazenamento gerenciado do banco de dados MySQL após a migração.
-
-## 6. **AWS CloudWatch**
-- Para monitoramento de logs e desempenho das instâncias EC2 e banco de dados.
-
-## 7. **AWS VPC (Virtual Private Cloud)**
-- Para configurar a infraestrutura de rede segura.
-
-## 8. **AWS Security Groups**
-- Para controle do tráfego de entrada e saída das instâncias.
-
-## 9. **AWS Route 53**
-- Para gerenciamento de DNS e redirecionamento de tráfego após o cutover.
-
-## 10. **Protocolos TCP (443, 1500, 3306)**
-- Para controle, transferência de dados e conexão com o banco de dados.
-
-<br>
-
-# Garantia de Segurança e Backup no Processo de Migração para AWS
-
-## 🔐 Como serão garantidos os requisitos de Segurança?
-
-### **Controle de Acesso:**
+## Segurança 🔐
+- **Controle de Acesso**
 - **Security Groups**: Configuração de regras para restringir acessos aos serviços e instâncias.
 - **IAM Roles**: Uso de IAM Roles para limitar permissões específicas aos serviços, garantindo que apenas usuários e processos autorizados possam acessar determinados recursos.
-
-### **Criptografia:**
 - **Tráfego seguro**: Uso de protocolo TCP 443 (TLS/SSL) para controle de replicação entre ambientes, garantindo tráfego seguro.
 - **Armazenamento de dados criptografados**: Os dados são armazenados de forma criptografada no S3 e no RDS utilizando AES-256, para proteger a integridade e confidencialidade das informações.
-
-### **Isolamento de Rede:**
 - **Subnet Pública e Privada**: A infraestrutura será dividida entre uma subnet pública (para o frontend) e uma subnet privada (para o backend e banco de dados), garantindo um melhor controle de tráfego.
 - **NAT Gateway**: Implementação de um NAT Gateway para permitir comunicação segura entre as instâncias privadas e a internet, sem expô-las diretamente.
-
-### **Monitoramento e Auditoria:**
 - **AWS CloudTrail**: Uso do CloudTrail para registrar e auditar todos os eventos de acesso aos serviços da AWS.
-- **AWS CloudWatch Alarms**: Configuração de alarmes para detectar anomalias de desempenho ou segurança nos serviços em tempo real.
-
-### **Firewall de Aplicação:**
 - **AWS WAF**: Implementação do Web Application Firewall (WAF) para proteger as aplicações contra ataques comuns, como DDoS e SQL Injection.
 
----
-
-## 🔄 Como será realizado o processo de Backup?
-
-### **Durante a Migração:**
+## Backup e Recuperação 🔄
 - **AWS MGN**: O AWS Migration Hub (MGN) realiza a replicação contínua dos dados, mantendo versões das informações. Isso garante a possibilidade de recuperação em caso de falha durante o processo de migração.
 - **Armazenamento Temporário no Amazon S3**: Caso seja necessário reverter a migração, os dados podem ser armazenados temporariamente no Amazon S3 para backup.
-
-### **Após a Migração (Ambiente AWS):**
 - **Snapshots do Amazon EBS**: Realização de snapshots periódicos dos volumes EC2 para garantir recuperação em caso de falha no armazenamento.
 - **Backups Automáticos do Amazon RDS**: Configuração de backups automáticos no Amazon RDS, com retenção configurável, para garantir a integridade dos dados.
 - **Replication Cross-Region**: Implementação de replicação de banco de dados para outra região, garantindo alta disponibilidade e tolerância a falhas.
 - **Armazenamento de Longo Prazo no S3 Glacier**: Arquivos e logs de auditoria serão armazenados no S3 Glacier, permitindo armazenamento a longo prazo com baixo custo.
-
----
 
 ## 🖥️ Diagrama da Infraestrutura na AWS
 
