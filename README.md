@@ -174,4 +174,40 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 ![image](https://github.com/user-attachments/assets/bf5f1721-3976-461b-9b10-6a044952790e)
 
 
-  
+# Etapa 2: Modernização/Kubernetes
+
+## Atividades da Migração
+- **Levantamento da infraestrutura**: Mapeamento dos recursos existentes para planejar a migração.
+- **Definição da arquitetura AWS**: Estruturação do ambiente na nuvem considerando escalabilidade e segurança.
+- **Configuração do Kubernetes (EKS)**: Criação e ajuste do cluster para orquestração de containers.
+- **Implementação de CI/CD**: Automação do deploy para garantir entregas contínuas.
+- **Monitoramento e ajustes**: Acompanhamento pós-migração para otimizações e correções.
+
+## Ferramentas Utilizadas
+- **Terraform**: Provisionamento da infraestrutura como código.
+- **Kubernetes**: Gerenciamento e escalabilidade de containers.
+- **Helm**: Automação do deploy de aplicações no Kubernetes.
+- **Prometheus & Grafana**: Monitoramento e visualização de métricas.
+- **AWS CodePipeline**: Automação do fluxo de CI/CD.
+- **Fluentd**: Coleta e análise de logs.
+
+## Infraestrutura na AWS
+- **Cluster EKS**: Orquestração e execução dos containers.
+- **Amazon RDS (MySQL)**: Armazenamento persistente dos dados.
+- **Elastic Load Balancing**: Distribuição de tráfego entre instâncias.
+- **Amazon Route 53**: Gerenciamento de DNS e roteamento de tráfego.
+- **AWS WAF**: Proteção contra ameaças e ataques.
+- **AWS CloudFront**: Distribuição otimizada de conteúdo.
+
+## Segurança
+- **AWS IAM**: Controle de permissões e autenticação.
+- **AWS Secrets Manager**: Armazenamento seguro de credenciais.
+- **AWS CloudWatch**: Monitoramento e rastreamento de aplicações.
+- **AWS WAF**: Proteção contra acessos indevidos.
+- **TLS/SSL**: Comunicação segura entre serviços.
+
+## Backup e Recuperação
+- **Backup automatizado do RDS**: Garantia de integridade dos dados.
+- **Snapshot dos volumes EBS**: Recuperação rápida de armazenamento.
+- **Logs e métricas no S3**: Registro histórico para auditoria.
+- **Disaster Recovery com replicação**: Estratégia para continuidade do serviço em falhas críticas.
