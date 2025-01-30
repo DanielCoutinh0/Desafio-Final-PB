@@ -167,11 +167,14 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 
 ## _Estimativa de custo Lift-and-Shift ETAPA 1_
 
-* Custo mensal: 380,99 USD USD
+* Custo mensal: 380,99 USD
   
 <br>
 
 ![image](https://github.com/user-attachments/assets/bf5f1721-3976-461b-9b10-6a044952790e)
+
+<br>
+<br>
 
 
 # Etapa 2: Modernização/Kubernetes
@@ -211,3 +214,22 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 - **Snapshot dos volumes EBS**: Recuperação rápida de armazenamento.
 - **Logs e métricas no S3**: Registro histórico para auditoria.
 - **Disaster Recovery com replicação**: Estratégia para continuidade do serviço em falhas críticas.
+
+---
+
+## 🖥️ Diagrama da Infraestrutura na AWS
+
+![Kubernetes drawio](https://github.com/user-attachments/assets/c1a5269a-1158-42de-8673-afd43b52ef49)
+
+---
+
+# 💰 Valores 
+
+## _Estimativa de custo Modernização ETAPA 2_
+
+* Custo mensal: 423,62 USD
+* Custo Anual: 5.083,44 USD
+
+<br>
+
+![imagem (1)](https://github.com/user-attachments/assets/784d1132-8fea-44f4-852e-bd019c96f891)
