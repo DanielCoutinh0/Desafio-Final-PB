@@ -50,7 +50,6 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 ## Atividades da Migração
 - Avaliação da infraestrutura atual (servidores, banco de dados, aplicações).
 - Identificação de requisitos de desempenho, segurança e escalabilidade.
-- Criar instâncias EC2 para backend e frontend.
 - Provisionar a infraestrutura de rede (VPC, Subnets, Security Groups).
 - Configurar servidores de replicação para staging area.
 - Provisionar RDS para o banco de dados.
@@ -67,29 +66,21 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 - **AWS DMS** (Database Migration Service) para a migração do banco de dados MySQL para o Amazon RDS.
 - **Amazon RDS** para armazenamento gerenciado do banco de dados MySQL após a migração.
 - **AWS CloudWatch** para monitoramento de logs e desempenho das instâncias EC2 e banco de dados.
-- **AWS VPC** (Virtual Private Cloud) para configurar a infraestrutura de rede segura.
-- **AWS Security Groups** para controle do tráfego de entrada e saída das instâncias.
-- ***AWS Route 53** para gerenciamento de DNS e redirecionamento de tráfego após o cutover.
 - **Protocolos TCP** (443, 1500, 3306) para controle, transferência de dados e conexão com o banco de dados.
 
 ## Segurança 🔐
-- **Controle de Acesso**
 - **Security Groups**: Configuração de regras para restringir acessos aos serviços e instâncias.
 - **IAM Roles**: Uso de IAM Roles para limitar permissões específicas aos serviços, garantindo que apenas usuários e processos autorizados possam acessar determinados recursos.
 - **Tráfego seguro**: Uso de protocolo TCP 443 (TLS/SSL) para controle de replicação entre ambientes, garantindo tráfego seguro.
-- **Armazenamento de dados criptografados**: Os dados são armazenados de forma criptografada no S3 e no RDS utilizando AES-256, para proteger a integridade e confidencialidade das informações.
-- **Subnet Pública e Privada**: A infraestrutura será dividida entre uma subnet pública (para o frontend) e uma subnet privada (para o backend e banco de dados), garantindo um melhor controle de tráfego.
-- **NAT Gateway**: Implementação de um NAT Gateway para permitir comunicação segura entre as instâncias privadas e a internet, sem expô-las diretamente.
+- **Subnet Pública e Privada**: A infraestrutura será dividida entre uma subnet pública (para o frontend) e uma subnet privada (para o backend e banco de dados)
 - **AWS CloudTrail**: Uso do CloudTrail para registrar e auditar todos os eventos de acesso aos serviços da AWS.
 - **AWS WAF**: Implementação do Web Application Firewall (WAF) para proteger as aplicações contra ataques comuns, como DDoS e SQL Injection.
 
 ## Backup e Recuperação 🔄
-- **AWS MGN**: O AWS Migration Hub (MGN) realiza a replicação contínua dos dados, mantendo versões das informações. Isso garante a possibilidade de recuperação em caso de falha durante o processo de migração.
+- **AWS MGN**: O AWS Migration Hub (MGN) realiza a replicação contínua dos dados, mantendo versões das informações.
 - **Armazenamento Temporário no Amazon S3**: Caso seja necessário reverter a migração, os dados podem ser armazenados temporariamente no Amazon S3 para backup.
 - **Snapshots do Amazon EBS**: Realização de snapshots periódicos dos volumes EC2 para garantir recuperação em caso de falha no armazenamento.
 - **Backups Automáticos do Amazon RDS**: Configuração de backups automáticos no Amazon RDS, com retenção configurável, para garantir a integridade dos dados.
-- **Replication Cross-Region**: Implementação de replicação de banco de dados para outra região, garantindo alta disponibilidade e tolerância a falhas.
-- **Armazenamento de Longo Prazo no S3 Glacier**: Arquivos e logs de auditoria serão armazenados no S3 Glacier, permitindo armazenamento a longo prazo com baixo custo.
 
 ## 🖥️ Diagrama da Infraestrutura na AWS
 
