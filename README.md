@@ -37,7 +37,7 @@ carga e que armazena estáticos como fotos e links. (5GB de dados, 4Gb de RAM,
 
 ---
 
-## Diagrama da arquitetura Aual:
+## Diagrama da arquitetura Atual:
 
 ![Screenshot 2025-01-21 163258](https://github.com/user-attachments/assets/34982be8-c280-4aa5-ac75-119750750bb3)
 
