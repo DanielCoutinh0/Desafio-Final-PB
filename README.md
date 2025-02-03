@@ -97,11 +97,11 @@ A meta é migrar rapidamente os servidores on-premises para a AWS, sem modificar
 
 ## _Estimativa de custo Lift-and-Shift ETAPA 1_
 
-* Custo mensal: 380,99 USD
+* Custo mensal: 445,51 USD
   
 <br>
 
-![image](https://github.com/user-attachments/assets/bf5f1721-3976-461b-9b10-6a044952790e)
+![aws contas](https://github.com/user-attachments/assets/172d20d8-6b80-4343-a55b-3fb8c8982ef1)
 
 <br>
 <br>
